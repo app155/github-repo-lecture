@@ -21,7 +21,7 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/")
+	@GetMapping("/1")
     public RedirectView redirectToLogin() {
         return new RedirectView("/login/");
     }

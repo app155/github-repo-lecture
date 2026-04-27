@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>社内統合管理システム</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		header {
+			color: black;
+			/* 背景色を削除し、文字色を黒に設定 */
+			padding: 10px;
+			text-align: center;
+		}
+
+		header .main-header {
+			font-size: 2em;
+			/* フォントサイズを2倍に */
+		}
+
+		header .sub-header {
+			display: flex;
+			justify-content: space-between;
+			/* 左寄せと右寄せを実現 */
+			font-size: 14px;
+			padding-right: 10px;
+			padding-left: 10px;
+		}
+
+		.sub-header .left-side {
+			text-align: left;
+		}
+
+		.sub-header .right-side {
+			text-align: right;
+		}
+
+		.container {
+			padding: 20px;
+		}
+
+		/* 銀色の金属リボン */
+		.ribbon {
+			background: linear-gradient(145deg, #d1d1d1, #e6e6e6);
+			/* 銀色のグラデーション */
+			border-radius: 5px;
+			/* 丸みを帯びた角 */
+			padding: 15px;
+			font-size: 18px;
+			font-weight: bold;
+			color: #333;
+			/* 文字色を濃くして目立たせる */
+			text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.8);
+			/* 反射感を出すための光沢感 */
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 1px 5px rgba(255, 255, 255, 0.6);
+			/* 光沢感と深み */
+			margin-bottom: 20px;
+		}
+
+		.search-condition {
+			display: flex;
+			flex-direction: column;
+			/* 要素を縦に並べる */
+			align-items: center;
+			/* 中央寄せ */
+			margin-bottom: 20px;
+		}
+
+		.section-title {
+			text-align: left;
+			/* 「■検索条件」を左寄せ */
+			font-size: 18px;
+			font-weight: bold;
+			margin-bottom: 10px;
+			width: 100%;
+			/* 見出しを中央寄せにしない */
+		}
+
+		.search-form {
+			width: 80%;
+			/* 幅を80%に設定して中央寄せ */
+		}
+
+		.search-form label {
+			margin-right: 10px;
+		}
+
+		.search-form input,
+		.search-form select {
+			padding: 5px;
+			margin-right: 10px;
+			margin-bottom: 15px;
+			/* 各要素の間隔を広げる */
+		}
+
+		.search-form button {
+			padding: 10px 20px;
+			background-color: #BDD7EE;
+			/* 背景色を#BDD7EEに変更 */
+			color: black;
+			border: none;
+			cursor: pointer;
+			margin-top: 20px;
+			/* ボタンの上に余白を追加 */
+		}
+
+		.search-form button:hover {
+			background-color: #A1C4D4;
+			/* ホバー時に少し暗く */
+		}
+
+		.employee-table {
+			width: 100%;
+			border-collapse: collapse;
+			/* ボーダーを崩さない */
+			margin-top: 20px;
+		}
+
+		.employee-table th,
+		.employee-table td {
+			border: 1px solid #ddd;
+			/* セルの境界線 */
+			padding: 8px;
+			text-align: center;
+		}
+
+		.employee-table th {
+			background-color: #BDD7EE;
+			/* ヘッダーの背景色 */
+			color: black;
+			/* 文字色を黒に設定 */
+		}
+
+		.employee-table td {
+			background-color: #f9f9f9;
+		}
+
+		.footer {
+			text-align: center;
+			margin-top: 20px;
+			font-size: 14px;
+		}
+
+		.right-align {
+			text-align: right;
+			/* 右寄せ用クラス */
+			margin-bottom: 10px;
+		}
+
+		.spaced {
+			margin-right: 20px;
+			/* 要素の間隔を広げる */
+		}
+
+		dialog {
+			width: fit-content;
+			height: 150px;
+			font-size: 20px;
+			position: relative;
+		}
+		
+		.modal-content {
+		    white-space: nowrap;
+		}
+
+		.modal-btns {
+			display: flex;
+			justify-content: center;
+			gap: 10px;
+			position: absolute;
+			bottom: 15px;
+			left: 0;
+			right: 0;
+		}
+
+		.modal-btn {
+			width: 80px;
+			height: 50px;
+		}
+	</style>
+	<script type="text/javascript" src="/js/clock.js" defer></script>
+	<script type="text/javascript" src="/js/loaddata.js" defer></script>
+</head>
+
+<body>
+	<!-- ヘッダー -->
+	<header>
+		<div class="main-header">社内統合管理システム</div>
+		</br>
+		<div class="sub-header">
+			<div class="left-side">
+				<div id="current-time">登録日時：YYYY年MM月DD日 hh時mm分ss秒</div>
+			</div>
+			<div class="right-side">
+				ユーザー名：XXXX <span class="spaced"></span><span class="spaced">権限：XX</span>
+				<button>ログアウト</button>
+			</div>
+		</div>
+	</header>
+
+	<!-- メインコンテンツ -->
+	<div class="container">
+		<!-- リボン -->
+		<div class="ribbon">社員管理</div>
+
+		<!-- 検索条件セクション -->
+		<div class="search-condition">
+			<div class="section-title">■検索条件</div>
+			<div class="search-form">
+				<!-- 1行目: 所属会社と社員名 -->
+				<div class="row">
+					<label for="company">所属会社</label>
+					<select id="company">
+						<option value="0">全て</option>
+					</select>
+
+					<label for="employee-name">社員名</label>
+					<input type="text" id="employee-name" placeholder="社員名">
+				</div>
+
+				<!-- 2行目: 職業種類と在職/非在職 -->
+				<div class="row">
+					<label for="job-type">職業種類</label>
+					<select id="job-type">
+					</select>
+
+					<label for="active">在職</label>
+					<input type="checkbox" id="active" checked="true">
+
+					<label for="inactive">非在職</label>
+					<input type="checkbox" id="inactive">
+				</div>
+
+				<!-- 3行目: 検索ボタン -->
+				<div class="row">
+					<button id="search-btn" type="button">検索</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- 社員一覧セクション -->
+		<div class="employee-list">
+			<div class="section-title">■社員一覧</div> <!-- ここを左寄せのスタイルに変更 -->
+			<div class="right-align">
+				<span id="data-num">件数：XX件</span> <span class="spaced"></span><a href="/register">新規登録</a>
+			</div>
+
+			<!-- テーブル -->
+			<table class="employee-table">
+				<thead>
+					<tr>
+						<th>所属会社</th>
+						<th>社員名</th>
+						<th>性別</th>
+						<th>職業種類</th>
+						<th>入社日</th>
+						<th>退社日</th>
+						<th>職務経歴書</th>
+						<th>編集</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>会社A</td>
+						<td>田中太郎</td>
+						<td>男性</td>
+						<td>職業A</td>
+						<td>2020年1月1日</td>
+						<td>2023年12月31日</td>
+						<td><a href="#">職務経歴書</a></td>
+						<td><a href="#">編集</a></td>
+					</tr>
+					<tr>
+						<td>会社B</td>
+						<td>鈴木花子</td>
+						<td>女性</td>
+						<td>職業B</td>
+						<td>2019年5月15日</td>
+						<td>2024年3月20日</td>
+						<td><a href="#">職務経歴書</a></td>
+						<td><a href="#">編集</a></td>
+					</tr>
+					<!-- 他の社員データをここに追加 -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<dialog id="checkbox-modal">
+		<div class="modal-content">
+			在籍と非在籍がいずれにしても、
+			<br>１つのチェックがひっすです。
+		</div>
+		<div class="modal-btns">
+			<button class="modal-btn" onclick="document.getElementById('checkbox-modal').close()">OK</button>
+		</div>
+	</dialog>
+
+	<dialog id="delete-modal">
+		<div class="modal-content">
+			
+		</div>
+		<div class="modal-btns">
+			<button class="modal-btn" id="delete-btn" onclick="document.getElementById('checkbox-modal').close()">OK</button>
+			<button class="modal-btn" onclick="document.getElementById('delete-modal').close()">キャンセル</button>
+		</div>
+	</dialog>
+
+	<!-- フッター -->
+	<div class="footer">
+		<p>&copy; 2024 社内統合管理システム</p>
+	</div>
+</body>
+
+</html>
