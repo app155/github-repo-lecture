@@ -49,7 +49,10 @@ public class SyainController {
 		Syain syain = syainService.getSyain(syainId);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String formattedNyuusyaDate = sdf.format(syain.getNyuusyaDate());
+		String formattedNyuusyaDate = "";
+		if (syain.getNyuusyaDate() != null) {
+			formattedNyuusyaDate = sdf.format(syain.getNyuusyaDate());
+		}
 		
 		model.addAttribute("syain", syain);
 		model.addAttribute("nyuusyaDate", formattedNyuusyaDate);
