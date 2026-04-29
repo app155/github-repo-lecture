@@ -195,7 +195,7 @@ public class Syain {
      * @mbg.generated
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private Date nyuusyaDate;
 
     /**
@@ -206,7 +206,7 @@ public class Syain {
      * @mbg.generated
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private Date taisyaDate;
 
     /**
