@@ -6,7 +6,7 @@ import java.util.Map;
 import com.kyh.system.model.Syain;
 
 public interface SyainService {
-	public List<Map<String, Object>> getComapnyNameList();
+	public List<Map<String, Object>> getCompanyNameList();
 	public List<Map<String, Object>> getJobTypeList();
 	public List<Syain> getSyainList(int company, String name, int jobType, boolean active, boolean inactive);
 	public int deleteSyain(int syainId);

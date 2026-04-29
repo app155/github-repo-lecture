@@ -53,7 +53,7 @@ public class SyainController {
 		
 		model.addAttribute("syain", syain);
 		model.addAttribute("nyuusyaDate", formattedNyuusyaDate);
-		model.addAttribute("syozokuKaisya", syainService.getComapnyNameList());
+		model.addAttribute("syozokuKaisya", syainService.getCompanyNameList());
 		model.addAttribute("syokugyoKind", syainService.getJobTypeList());
 		
 		return "syain/modify";
@@ -72,7 +72,7 @@ public class SyainController {
 	@GetMapping(value = "/api/get-company")
 	@ResponseBody
 	public List<Map<String, Object>> getCompanyList() {
-		return syainService.getComapnyNameList();
+		return syainService.getCompanyNameList();
 	}
 	
 	@GetMapping(value = "/api/get-job-type")
