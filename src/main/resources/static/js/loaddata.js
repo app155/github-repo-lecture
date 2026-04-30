@@ -129,7 +129,9 @@ function openDeleteModal(name, id) {
 
 async function deleteButtonClick(id) {
 	try {
-		const response = await fetch(`/api/delete-user?syainId=${id}`);
+		const response = await fetch(`/api/delete-user?syainId=${id}`, {
+			method: 'DELETE'
+		});
 		const data = await response.json();
 		
 		fetchDataBySelection();

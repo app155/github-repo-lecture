@@ -93,12 +93,6 @@ async function loadOSData() {
 	}
 }
 
-async function inputCheck(e) {
-	e.preventDefault();
-
-
-}
-
 async function registerUser(e) {
 	e.preventDefault();
 
@@ -213,7 +207,7 @@ async function registerUser(e) {
 		}
 	}
 
-	const formData = new FormData(event.target);
+	const formData = new FormData(e.target);
 	const data = Object.fromEntries(formData.entries());
 
 	try {
@@ -230,7 +224,7 @@ async function registerUser(e) {
 			location.href = '/done';
 		}
 		else {
-			location.href = '/error';
+			location.href = '/error-page';
 		}
 	}
 	catch (error) {

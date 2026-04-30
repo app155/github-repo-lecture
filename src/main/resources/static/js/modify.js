@@ -160,34 +160,21 @@ async function checkModify() {
 }
 
 async function modifyUser(data) {
-	const params = new URLSearchParams({
-		syainId: data.syainId,
-		firstNameKanji: data.firstNameKanji,
-		lastNameKanji: data.lastNameKanji,
-		firstNameKana: data.firstNameKana,
-		lastNameKana: data.lastNameKana,
-		firstNameEigo: data.firstNameEigo,
-		lastNameEigo: data.lastNameEigo,
-		seibetu: data.seibetu,
-		syozokuKaisya: data.syozokuKaisya,
-		syokugyoKind: data.syokugyoKind
-	});
-
-	if (data.nyuusyaDate != null) {
-		params.append('nyuusyaDate', data.nyuusyaDate);
-	}
-
-	if (data.taisyaDate != null) {
-		params.append('taisyaDate', data.taisyaDate);
-	}
-
 	try {
-		const response = await fetch(`/api/modify-user?${params.toString()}`);
-		const data = await response.json();
-
-		console.log(data);
-
-		location.href = '/done';
+		const response = await fetch('/api/modify-user', {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		});
+		
+		if(response.ok) {
+			location.href = '/done';
+		}
+		else {
+			location.href = '/error-page';
+		}
 	}
 	catch (error) {
 		console.error("更新中エラー", error);
