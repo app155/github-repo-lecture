@@ -325,7 +325,7 @@
 		</div>
 		<div class="row">
 			<label for="taisyaDate">退社日</label>
-			<input type="text" id="taisyaDate" th:value="${syain.taisyaDate}">&nbsp;※YYYY-MM-DD
+			<input type="text" id="taisyaDate" th:value="${syain.taisyaDate != null ? #dates.format(syain.taisyaDate, 'yyyy-MM-dd') : ''}">&nbsp;※YYYY-MM-DD
 		</div>
 		<div class="row">
 			<label for="syokugyoKind">職業種類</label>
