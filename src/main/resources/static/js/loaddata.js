@@ -97,7 +97,7 @@ async function reloadUserDataList(data) {
 		row.innerHTML = `
 		            <td>${companyList[item.syozokuKaisya - 1].value1 || '-'}</td>
 		            <td>${item.firstNameKanji} ${item.lastNameKanji}</td>
-		            <td>${item.seibetu === 1 ? '男性' : '女性'}</td>
+		            <td>${item.seibetu === 1 ? '男' : '女'}</td>
 		            <td>${jobTypeList[item.syokugyoKind - 1].value1 || '-'}</td>
 		            <td>${item.nyuusyaDate || '-'}</td>
 		            <td>${item.taisyaDate || '-'}</td>
