@@ -3521,6 +3521,76 @@ public class SyainExample {
             addCriterion("kousinnbi not between", value1, value2, "kousinnbi");
             return (Criteria) this;
         }
+
+        public Criteria andEmployeecodeIsNull() {
+            addCriterion("employeecode is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeIsNotNull() {
+            addCriterion("employeecode is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeEqualTo(String value) {
+            addCriterion("employeecode =", value, "employeecode");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeNotEqualTo(String value) {
+            addCriterion("employeecode <>", value, "employeecode");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeGreaterThan(String value) {
+            addCriterion("employeecode >", value, "employeecode");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeGreaterThanOrEqualTo(String value) {
+            addCriterion("employeecode >=", value, "employeecode");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeLessThan(String value) {
+            addCriterion("employeecode <", value, "employeecode");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeLessThanOrEqualTo(String value) {
+            addCriterion("employeecode <=", value, "employeecode");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeLike(String value) {
+            addCriterion("employeecode like", value, "employeecode");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeNotLike(String value) {
+            addCriterion("employeecode not like", value, "employeecode");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeIn(List<String> values) {
+            addCriterion("employeecode in", values, "employeecode");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeNotIn(List<String> values) {
+            addCriterion("employeecode not in", values, "employeecode");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeBetween(String value1, String value2) {
+            addCriterion("employeecode between", value1, value2, "employeecode");
+            return (Criteria) this;
+        }
+
+        public Criteria andEmployeecodeNotBetween(String value1, String value2) {
+            addCriterion("employeecode not between", value1, value2, "employeecode");
+            return (Criteria) this;
+        }
     }
 
     /**

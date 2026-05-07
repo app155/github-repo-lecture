@@ -98,7 +98,7 @@ async function registerUser(e) {
 
 	const fields = [
 		{
-			id: 'syainId',
+			id: 'employeecode',
 			name: '社員コード',
 			required: true,
 			pattern: /^[0-9a-zA-Z]*$/,
