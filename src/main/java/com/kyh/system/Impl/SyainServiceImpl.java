@@ -17,7 +17,7 @@ public class SyainServiceImpl implements SyainService {
 	public SyainMapper syainMapper; 
 	
 	@Override
-	public List<Map<String, Object>> getComapnyNameList() {
+	public List<Map<String, Object>> getCompanyNameList() {
 		return syainMapper.getCompanyNameList();
 	}
 

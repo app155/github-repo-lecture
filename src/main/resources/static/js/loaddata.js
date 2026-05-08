@@ -5,6 +5,8 @@ async function loadCompanyData() {
 
         const selectElement = document.getElementById('company');
 		
+		companyList = data;
+		
 		console.log(data);
 
         data.forEach(item => {
@@ -25,6 +27,8 @@ async function loadJobTypeData() {
         const data = await response.json();
 
         const selectElement = document.getElementById('job-type');
+		
+		jobTypeList = data;
 		
 		console.log(data);
 
@@ -91,10 +95,10 @@ async function reloadUserDataList(data) {
 		const row = document.createElement('tr');
 		
 		row.innerHTML = `
-		            <td>${item.syozokuKaisya || '-'}</td>
+		            <td>${companyList[item.syozokuKaisya - 1].value1 || '-'}</td>
 		            <td>${item.firstNameKanji} ${item.lastNameKanji}</td>
-		            <td>${item.seibetu === 1 ? '男性' : '女性'}</td>
-		            <td>${item.syokugyoKind || '-'}</td>
+		            <td>${item.seibetu === 1 ? '男' : '女'}</td>
+		            <td>${jobTypeList[item.syokugyoKind - 1].value1 || '-'}</td>
 		            <td>${item.nyuusyaDate || '-'}</td>
 		            <td>${item.taisyaDate || '-'}</td>
 		            <td><a href="/download/resume/${item.syainId}">職무経歴書</a></td>
@@ -125,7 +129,9 @@ function openDeleteModal(name, id) {
 
 async function deleteButtonClick(id) {
 	try {
-		const response = await fetch(`/api/delete-user?syainId=${id}`);
+		const response = await fetch(`/api/delete-user?syainId=${id}`, {
+			method: 'DELETE'
+		});
 		const data = await response.json();
 		
 		fetchDataBySelection();
@@ -134,6 +140,9 @@ async function deleteButtonClick(id) {
 		console.error("でーた削除エラー: ", error);
 	}
 }
+
+let companyList = [];
+let jobTypeList = [];
 
 (async () => {
 	try {

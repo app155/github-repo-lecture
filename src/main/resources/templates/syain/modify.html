@@ -275,7 +275,7 @@
 	<!-- メインコンテンツ -->
 	<div class="container">
 		<!-- リボン -->
-		<div class="ribbon">社員管理</div>
+		<div class="ribbon">社員更新</div>
 		<div class="sub-header">基本情報</div>
 		<hr />
 		<input type="hidden" id="syainId" th:value="${syain.syainId}" readonly>
@@ -310,7 +310,7 @@
 		</div>
 
 		<div class="sub-header">会社関連情報</div>
-		<hr />s
+		<hr />
 		<div class="row">
 			<label for="syozokuKaisya">所属会社</label>
 			<select id="syozokuKaisya">
@@ -325,7 +325,7 @@
 		</div>
 		<div class="row">
 			<label for="taisyaDate">退社日</label>
-			<input type="text" id="taisyaDate" th:value="${syain.taisyaDate}">&nbsp;※YYYY-MM-DD
+			<input type="text" id="taisyaDate" th:value="${syain.taisyaDate != null ? #dates.format(syain.taisyaDate, 'yyyy-MM-dd') : ''}">&nbsp;※YYYY-MM-DD
 		</div>
 		<div class="row">
 			<label for="syokugyoKind">職業種類</label>
@@ -337,7 +337,7 @@
 		</div>
 		<hr />
 		<div class="center-row">
-			<button type="button" class="submit-btn" onclick="checkModify()">登録</button>
+			<button type="button" class="submit-btn" onclick="checkModify()">更新</button>
 		</div>
 
 		<dialog id="modify-check-modal">

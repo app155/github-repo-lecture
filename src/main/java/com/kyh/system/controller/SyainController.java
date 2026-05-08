@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,7 +34,6 @@ public class SyainController {
         return new RedirectView("/syain/");
     }
 	
-	
 	@RequestMapping(value = "/syain", method = {RequestMethod.POST, RequestMethod.GET})
 	public String SyainPage() {
 		return "syain/syain";
@@ -49,11 +49,14 @@ public class SyainController {
 		Syain syain = syainService.getSyain(syainId);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String formattedNyuusyaDate = sdf.format(syain.getNyuusyaDate());
+		String formattedNyuusyaDate = "";
+		if (syain.getNyuusyaDate() != null) {
+			formattedNyuusyaDate = sdf.format(syain.getNyuusyaDate());
+		}
 		
 		model.addAttribute("syain", syain);
 		model.addAttribute("nyuusyaDate", formattedNyuusyaDate);
-		model.addAttribute("syozokuKaisya", syainService.getComapnyNameList());
+		model.addAttribute("syozokuKaisya", syainService.getCompanyNameList());
 		model.addAttribute("syokugyoKind", syainService.getJobTypeList());
 		
 		return "syain/modify";
@@ -64,7 +67,7 @@ public class SyainController {
 		return "syain/done";
 	}
 	
-	@RequestMapping(value = "/error", method = {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/error-page", method = {RequestMethod.POST, RequestMethod.GET})
 	public String ErrorPage() {
 		return "syain/error";
 	}
@@ -72,7 +75,7 @@ public class SyainController {
 	@GetMapping(value = "/api/get-company")
 	@ResponseBody
 	public List<Map<String, Object>> getCompanyList() {
-		return syainService.getComapnyNameList();
+		return syainService.getCompanyNameList();
 	}
 	
 	@GetMapping(value = "/api/get-job-type")
@@ -98,7 +101,7 @@ public class SyainController {
 		return syainService.getOSList();
 	}
 	
-	@GetMapping(value = "/api/delete-user")
+	@DeleteMapping(value = "/api/delete-user")
 	@ResponseBody
 	public boolean deleteSyain(@RequestParam int syainId) {
 		int num = 0;
@@ -129,9 +132,9 @@ public class SyainController {
 		return ResponseEntity.badRequest().build();
 	}
 	
-	@GetMapping(value = "/api/modify-user")
+	@PutMapping(value = "/api/modify-user")
 	@ResponseBody
-	public boolean updateSyain(@ModelAttribute Syain syain) {
+	public boolean updateSyain(@RequestBody Syain syain) {
 		int num = 0;
 		
 		try {
